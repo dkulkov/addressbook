@@ -39,13 +39,45 @@ public class TestClass {
     }
 
     @Test
-    public void test1() {
+    public void createGroup() {
         goToGroupPage();
         initGroupCreation();
         fillGroupForm(new GroupData("moscow", "saratov", "chelyabinsk"));
         submit();
         returnGroupCreation();
         logOut();
+    }
+
+    @Test
+    public void createContact() {
+        goToContactForm();
+        createNewContact(new ContactData("Anton", "Melnikov", "89033224931", "antoha@mail.ru"));
+        submitContact();
+        logOut();
+    }
+
+    private void submitContact() {
+        driver.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
+    }
+
+    private void createNewContact(ContactData contactData) {
+        driver.findElement(By.name("firstname")).click();
+        driver.findElement(By.name("firstname")).clear();
+        driver.findElement(By.name("firstname")).sendKeys(contactData.firstName());
+        driver.findElement(By.name("lastname")).click();
+        driver.findElement(By.name("lastname")).clear();
+        driver.findElement(By.name("lastname")).sendKeys(contactData.lastName());
+        driver.findElement(By.name("mobile")).click();
+        driver.findElement(By.name("mobile")).clear();
+        driver.findElement(By.name("mobile")).sendKeys(contactData.mobile());
+        driver.findElement(By.name("email")).click();
+        driver.findElement(By.name("email")).clear();
+        driver.findElement(By.name("email")).sendKeys(contactData.email());
+    }
+
+    private void goToContactForm() {
+        driver.findElement(By.linkText("add new")).click();
+        driver.get("http://localhost/addressbook/edit.php");
     }
 
     private void logOut() {

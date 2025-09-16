@@ -16,27 +16,24 @@ public class TestClass {
     private boolean acceptNextAlert = true;
     private String baseUrl;
     private final StringBuffer verificationErrors = new StringBuffer();
-   // JavascriptExecutor js;
-    @BeforeEach
+      @BeforeEach
     public void setUp() throws Exception {
-        //System.setProperty("webdriver.chrome.driver", "C:\\Users\\dkulkov\\IdeaProjects\\addressbook\\src\\test\\chromedriver.exe");
-         driver = new ChromeDriver();
-        //driver.get("C:\\Users\\dkulkov\\IdeaProjects\\addressbook\\src\\test\\chromedriver.exe");
-       baseUrl = "https://www.katalon.com/";
+                driver = new ChromeDriver();
+               baseUrl = "https://www.katalon.com/";
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
-        //js = (JavascriptExecutor) driver;
-    }
+          driver.get("http://localhost/addressbook/index.php");
+          driver.findElement(By.name("user")).clear();
+          driver.findElement(By.name("user")).sendKeys("admin");
+          driver.findElement(By.id("LoginForm")).click();
+          driver.findElement(By.name("pass")).click();
+          driver.findElement(By.name("pass")).clear();
+          driver.findElement(By.name("pass")).sendKeys("secret");
+          driver.findElement(By.xpath("//input[@value='Login']")).click();
+            }
 
     @Test
     public void test1() {
-        driver.get("http://localhost/addressbook/index.php");
-        driver.findElement(By.name("user")).clear();
-        driver.findElement(By.name("user")).sendKeys("admin");
-        driver.findElement(By.id("LoginForm")).click();
-        driver.findElement(By.name("pass")).click();
-        driver.findElement(By.name("pass")).clear();
-        driver.findElement(By.name("pass")).sendKeys("secret");
-        driver.findElement(By.xpath("//input[@value='Login']")).click();
+
         driver.findElement(By.linkText("groups")).click();
         driver.get("http://localhost/addressbook/group.php");
         driver.findElement(By.name("new")).click();

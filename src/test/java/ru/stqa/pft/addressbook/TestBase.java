@@ -1,22 +1,20 @@
 package ru.stqa.pft.addressbook;
 
-import groovy.util.logging.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
-@Slf4j
-public class TestClass {
+public class TestBase {
+    private final StringBuffer verificationErrors = new StringBuffer();
     private WebDriver driver;
     private boolean acceptNextAlert = true;
     private String baseUrl;
-    private final StringBuffer verificationErrors = new StringBuffer();
 
     @BeforeEach
     public void setUp() throws Exception {
@@ -38,29 +36,11 @@ public class TestClass {
         driver.findElement(By.xpath("//input[@value='Login']")).click();
     }
 
-    @Test
-    public void createGroup() {
-        goToGroupPage();
-        initGroupCreation();
-        fillGroupForm(new GroupData("moscow", "saratov", "chelyabinsk"));
-        submit();
-        returnGroupCreation();
-        logOut();
-    }
-
-    @Test
-    public void createContact() {
-        goToContactForm();
-        createNewContact(new ContactData("Anton", "Melnikov", "89033224931", "antoha@mail.ru"));
-        submitContact();
-        logOut();
-    }
-
-    private void submitContact() {
+    protected void submitContact() {
         driver.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
     }
 
-    private void createNewContact(ContactData contactData) {
+    protected void createNewContact(ContactData contactData) {
         driver.findElement(By.name("firstname")).click();
         driver.findElement(By.name("firstname")).clear();
         driver.findElement(By.name("firstname")).sendKeys(contactData.firstName());
@@ -75,24 +55,24 @@ public class TestClass {
         driver.findElement(By.name("email")).sendKeys(contactData.email());
     }
 
-    private void goToContactForm() {
+    protected void goToContactForm() {
         driver.findElement(By.linkText("add new")).click();
         driver.get("http://localhost/addressbook/edit.php");
     }
 
-    private void logOut() {
+    protected void logOut() {
         driver.findElement(By.linkText("Logout")).click();
     }
 
-    private void returnGroupCreation() {
+    protected void returnToGroupPage() {
         driver.findElement(By.linkText("group page")).click();
     }
 
-    private void submit() {
+    protected void submit() {
         driver.findElement(By.name("submit")).click();
     }
 
-    private void fillGroupForm(GroupData groupData) {
+    protected void fillGroupForm(GroupData groupData) {
         driver.findElement(By.name("group_name")).click();
         driver.findElement(By.name("group_name")).clear();
         driver.findElement(By.name("group_name")).sendKeys(groupData.name());
@@ -104,11 +84,11 @@ public class TestClass {
         driver.findElement(By.name("group_footer")).sendKeys(groupData.footer());
     }
 
-    private void initGroupCreation() {
+    protected void initGroupCreation() {
         driver.findElement(By.name("new")).click();
     }
 
-    private void goToGroupPage() {
+    protected void goToGroupPage() {
         driver.findElement(By.linkText("groups")).click();
     }
 
@@ -121,37 +101,11 @@ public class TestClass {
         }
     }
 
-    private boolean isElementPresent(By by) {
-        try {
-            driver.findElement(by);
-            return true;
-        } catch (NoSuchElementException e) {
-            return false;
-        }
+    protected void deleteSelectedGroups() {
+        driver.findElement(By.name("delete")).click();
     }
 
-    private boolean isAlertPresent() {
-        try {
-            driver.switchTo().alert();
-            return true;
-        } catch (NoAlertPresentException e) {
-            return false;
-        }
+    protected void selectGroup() {
+        driver.findElement(By.name("selected[]")).click();
     }
-
-    private String closeAlertAndGetItsText() {
-        try {
-            Alert alert = driver.switchTo().alert();
-            String alertText = alert.getText();
-            if (acceptNextAlert) {
-                alert.accept();
-            } else {
-                alert.dismiss();
-            }
-            return alertText;
-        } finally {
-            acceptNextAlert = true;
-        }
-    }
-
 }

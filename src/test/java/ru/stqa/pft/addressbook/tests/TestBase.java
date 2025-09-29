@@ -17,10 +17,7 @@ public class TestBase {
     @AfterEach
     public void tearDown() throws Exception {
         app.stop();
-        //String verificationErrorString = app.verificationErrors.toString();
-        //if (!verificationErrorString.isEmpty()) {
-            //fail(verificationErrorString);
-       // }
+
     }
 
 }

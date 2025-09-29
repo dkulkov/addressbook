@@ -15,6 +15,5 @@ public class GroupCreationTest extends TestBase {
         app.getGroupHelper().fillGroupForm(new GroupData("moscow", "saratov", "chelyabinsk"));
         app.getGroupHelper().submit();
         app.getGroupHelper().returnToGroupPage();
-        app.logOut();
-    }
+            }
  }

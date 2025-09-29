@@ -23,7 +23,28 @@ public class ContactHelper extends BaseHelper {
 
     }
 
+    public void selectContact() {
+        click(By.name("id=1"));
+    }
+
+    public void editContact() {
+        click(By.xpath("//table[@id='maintable']/tbody/tr[4]/td[8]/a/img"));
+    }
+
+    public void deleteContact() {
+        click(By.xpath("//input[@value='Delete']"));
+    }
+
     public void goToContactForm() {
+        click(By.linkText("home"));
+    }
+
+
+    public void updateContact() {
+        click(By.name("update"));
+    }
+
+    public void goToNewContactForm() {
         click(By.linkText("add new"));
 
     }

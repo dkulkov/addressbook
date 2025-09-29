@@ -4,7 +4,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import ru.stqa.pft.addressbook.appmanager.ApplicationManager;
 
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class TestBase {
 

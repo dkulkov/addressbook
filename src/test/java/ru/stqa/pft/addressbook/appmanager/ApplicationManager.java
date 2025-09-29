@@ -9,6 +9,7 @@ import java.time.Duration;
 
 public class ApplicationManager {
     protected WebDriver driver;
+    private SessionHelper sessionHelper;
     private  NavigationHelper navigationHelper;
     private  GroupHelper groupHelper;
     private boolean acceptNextAlert = true;
@@ -22,18 +23,11 @@ public class ApplicationManager {
         driver.get("http://localhost/addressbook/group.php");
         groupHelper = new GroupHelper(driver);
         navigationHelper = new NavigationHelper(driver);
-        login("admin", "secret");
+        sessionHelper = new SessionHelper(driver);
+        sessionHelper.login("admin", "secret");
     }
 
-    private void login(String userName, String password) {
-        driver.findElement(By.name("user")).clear();
-        driver.findElement(By.name("user")).sendKeys(userName);
-        driver.findElement(By.id("LoginForm")).click();
-        driver.findElement(By.name("pass")).click();
-        driver.findElement(By.name("pass")).clear();
-        driver.findElement(By.name("pass")).sendKeys(password);
-        driver.findElement(By.xpath("//input[@value='Login']")).click();
-    }
+
 
     public void submitContact() {
         driver.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();

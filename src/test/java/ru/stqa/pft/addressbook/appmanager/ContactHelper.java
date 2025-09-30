@@ -24,7 +24,7 @@ public class ContactHelper extends BaseHelper {
     }
 
     public void selectContact() {
-        click(By.name("id=1"));
+        click(By.name("id=2"));
     }
 
     public void editContact() {

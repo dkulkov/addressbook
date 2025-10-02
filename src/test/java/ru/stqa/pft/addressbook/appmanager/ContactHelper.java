@@ -24,7 +24,7 @@ public class ContactHelper extends BaseHelper {
     }
 
     public void selectContact() {
-        click(By.name("id=2"));
+        click(By.id("1"));
     }
 
     public void editContact() {
@@ -34,6 +34,11 @@ public class ContactHelper extends BaseHelper {
     public void deleteContact() {
         click(By.xpath("//input[@value='Delete']"));
     }
+
+    public void confirmDeletion() {
+        driver.switchTo().alert().accept();
+    }
+
 
     public void goToContactForm() {
         click(By.linkText("home"));

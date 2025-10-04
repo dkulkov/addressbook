@@ -3,12 +3,15 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.Browser;
 
 import java.time.Duration;
 
 public class ApplicationManager {
 
-    protected WebDriver driver;
+    public WebDriver driver;
 
     private  ContactHelper contactHelper ;
     private SessionHelper sessionHelper;
@@ -18,7 +21,14 @@ public class ApplicationManager {
     private String baseUrl;
 
     public void init() {
-        driver = new ChromeDriver();
+        String browser = Browser.CHROME.browserName();
+        if (browser == Browser.CHROME.browserName()) {
+            driver = new ChromeDriver();
+        } else if (browser == Browser.FIREFOX.browserName()) {
+            driver = new FirefoxDriver();
+        } else if (browser == Browser.IE.browserName()) {
+            driver = new InternetExplorerDriver();
+        }
         baseUrl = "https://www.katalon.com/";
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
         driver.get("http://localhost/addressbook/index.php");

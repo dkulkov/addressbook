@@ -34,7 +34,7 @@ public class ContactHelper extends BaseHelper {
     }
 
     public void selectContact() {
-        click(By.id("1"));
+        click(By.xpath("//table[@id='maintable']//tr[2]/td[1]/input"));
     }
 
     public void editContact() {

@@ -1,4 +1,6 @@
 package ru.stqa.pft.addressbook.model;
 
-public record ContactData(String firstName, String lastName, String mobile, String email) {
+
+
+public record ContactData(String firstName, String lastName, String mobile, String email, String group) {
 }

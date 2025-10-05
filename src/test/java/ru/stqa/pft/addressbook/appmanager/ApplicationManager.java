@@ -30,7 +30,7 @@ public class ApplicationManager {
             driver = new InternetExplorerDriver();
         }
         baseUrl = "https://www.katalon.com/";
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
         driver.get("http://localhost/addressbook/index.php");
         driver.get("http://localhost/addressbook/group.php");
         contactHelper = new ContactHelper(driver);

@@ -38,7 +38,7 @@ public class ContactHelper extends BaseHelper {
     }
 
     public void editContact() {
-        click(By.xpath("//table[@id='maintable']/tbody/tr[4]/td[8]/a/img"));
+        click(By.xpath("//img[@alt='Edit']"));
     }
 
     public void deleteContact() {

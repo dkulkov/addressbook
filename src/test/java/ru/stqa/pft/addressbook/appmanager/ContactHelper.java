@@ -63,4 +63,14 @@ public class ContactHelper extends BaseHelper {
         click(By.linkText("add new"));
 
     }
+
+    public void createContact(ContactData contact, boolean creation) {
+        goToNewContactForm();
+        createNewContact(contact, creation);
+        submitContact();
+    }
+
+    public boolean isThereAContact() {
+        return  isElementPresent(By.xpath("//table[@id='maintable']//tr[2]/td[1]/input"));
+    }
 }

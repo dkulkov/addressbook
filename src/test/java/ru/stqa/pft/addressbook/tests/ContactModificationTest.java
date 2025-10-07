@@ -7,10 +7,10 @@ import ru.stqa.pft.addressbook.model.ContactData;
 public class ContactModificationTest extends TestBase {
     @Test
     public void contactModificationTest() {
-        int before = app.getContactHelper().getContactCount();
         if (! app.getContactHelper().isThereAContact()) {
             app.getContactHelper().createContact(new ContactData("Test", "Ivanov", "89556768958", "test@mail.ru", "aaaa"), true);
         }
+        int before = app.getContactHelper().getContactCount();
         app.getContactHelper().goToContactForm();
         app.getContactHelper().editContact();
         app.getContactHelper().createNewContact(new ContactData("Katya", "Xxxx", "89995676800", "zzz@mail.ru", null), false);

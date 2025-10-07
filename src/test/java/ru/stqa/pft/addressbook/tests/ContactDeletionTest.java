@@ -5,11 +5,13 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 
+import java.util.List;
+
 public class ContactDeletionTest extends  TestBase {
     @Test
 
     public void contactDeletionTest() {
-        int before = app.getContactHelper().getContactCount();
+        List<ContactData> before = app.getContactHelper().getContactList();
         if (! app.getContactHelper().isThereAContact()) {
             app.getContactHelper().createContact(new ContactData("Test", "Ivanov", "89556768958", "test@mail.ru", "aaaa"), true);
         }
@@ -17,8 +19,9 @@ public class ContactDeletionTest extends  TestBase {
         app.getContactHelper().selectContact();
         app.getContactHelper().deleteContact();
         app.getContactHelper().confirmDeletion();
-        int after = app.getContactHelper().getContactCount();
-        Assert.assertEquals(after, before - 1);
+        app.getContactHelper().goToContactForm();
+        List<ContactData> after = app.getContactHelper().getContactList();
+        Assert.assertEquals(after.size(), before.size() - 1);
 
     }
 }

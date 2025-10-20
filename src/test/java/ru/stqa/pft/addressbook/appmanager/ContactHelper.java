@@ -87,8 +87,8 @@ public class ContactHelper extends BaseHelper {
         List<ContactData> contacts = new ArrayList<ContactData>();
         List<WebElement> elements = driver.findElements(By.xpath("//table[@id='maintable']//tr[not(@class='header')]"));
         for (WebElement element : elements) {
-            String name = element.getText();
-            ContactData contact = new ContactData(null, null, null, null , null);
+            String[] name = element.getText().split("\\s");
+            ContactData contact = new ContactData(name[0], name[1], name[2], name[3] , null);
             contacts.add(contact);
         }
         return contacts;

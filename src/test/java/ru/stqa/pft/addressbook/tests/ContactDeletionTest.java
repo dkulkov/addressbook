@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.tests;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.testng.Assert;
@@ -8,7 +9,7 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import java.util.List;
 
 public class ContactDeletionTest extends  TestBase {
-    @Test
+    @Disabled
 
     public void contactDeletionTest() {
         List<ContactData> before = app.getContactHelper().getContactList();

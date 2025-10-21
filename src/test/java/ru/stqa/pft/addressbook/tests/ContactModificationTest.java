@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.tests;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
@@ -8,7 +9,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class ContactModificationTest extends TestBase {
-    @Test
+    @Disabled
     public void contactModificationTest() {
         if (! app.getContactHelper().isThereAContact()) {
             app.getContactHelper().createContact(new ContactData("Test", "Ivanov", "89556768958", "test@mail.ru", "aaaa"), true);

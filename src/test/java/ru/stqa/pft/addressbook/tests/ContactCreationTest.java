@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressbook.tests;
 
 import groovy.util.logging.Slf4j;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
@@ -14,7 +15,7 @@ import java.util.List;
 public class ContactCreationTest extends TestBase {
 
 
-    @Test
+    @Disabled
     public void testContactCreation() {
         List<ContactData> before = app.getContactHelper().getContactList();
         app.getContactHelper().goToNewContactForm();

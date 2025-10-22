@@ -46,6 +46,18 @@ public final class GroupData {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        GroupData groupData = (GroupData) o;
+        return id == groupData.id && Objects.equals(name, groupData.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
+    }
+
     public int id() {
         return id;
     }
@@ -61,16 +73,6 @@ public final class GroupData {
     public String footer() {
         return footer;
     }
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        GroupData groupData = (GroupData) o;
-        return Objects.equals(name, groupData.name);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(name);
-    }
 }
 

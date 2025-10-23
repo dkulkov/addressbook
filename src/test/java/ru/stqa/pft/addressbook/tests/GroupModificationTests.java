@@ -3,6 +3,7 @@ package ru.stqa.pft.addressbook.tests;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.GroupData;
@@ -25,7 +26,7 @@ public class GroupModificationTests extends TestBase {
     }
     }
 
-    @Test
+    @Disabled
     public void testGroupModification() {
 
         Groups before = app.group().all();

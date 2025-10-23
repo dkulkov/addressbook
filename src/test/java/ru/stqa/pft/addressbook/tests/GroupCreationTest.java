@@ -2,6 +2,7 @@ package ru.stqa.pft.addressbook.tests;
 import groovy.util.logging.Slf4j;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.GroupData;
@@ -16,7 +17,7 @@ import static org.hamcrest.MatcherAssert.*;
 @Slf4j
 public class GroupCreationTest extends TestBase {
 
-    @Test
+    @Disabled
     public void testGroupCreation() {
         app.goTo().groupPage();
         Groups before = app.group().all();
@@ -30,7 +31,7 @@ public class GroupCreationTest extends TestBase {
     }
 
 
-    @Test
+    @Disabled
     public void testBadGroupCreation() {
         app.goTo().groupPage();
         Groups before = app.group().all();

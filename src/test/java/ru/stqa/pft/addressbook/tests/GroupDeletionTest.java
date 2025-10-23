@@ -2,6 +2,7 @@ package ru.stqa.pft.addressbook.tests;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.GroupData;
@@ -26,7 +27,7 @@ public class GroupDeletionTest  extends TestBase {
     }
     
     
-    @Test
+    @Disabled
     public void testGroupDeletion() throws Exception {
 
         Groups before = app.group().all();

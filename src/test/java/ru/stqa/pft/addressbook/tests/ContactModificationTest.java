@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.tests;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.testng.Assert;
@@ -9,26 +10,30 @@ import java.util.Comparator;
 import java.util.List;
 
 public class ContactModificationTest extends TestBase {
-    @Disabled
-    public void contactModificationTest() {
-        if (! app.getContactHelper().isThereAContact()) {
-            app.getContactHelper().createContact(new ContactData("Test", "Ivanov", "89556768958", "test@mail.ru", "aaaa"), true);
-        }
-        List<ContactData> before = app.getContactHelper().getContactList();
-        app.getContactHelper().goToContactForm();
-        app.getContactHelper().editContact();
-        app.getContactHelper().createNewContact(new ContactData("Katya", "Xxxx", "89995676800", "zzz@mail.ru", null), false);
-        app.getContactHelper().updateContact();
-        app.getContactHelper().goToContactForm();
-        List<ContactData> after = app.getContactHelper().getContactList();
 
-        Comparator<? super ContactData> byName = Comparator
-                .comparing(ContactData::lastName)
-                .thenComparing(ContactData::firstName);
+    @BeforeEach
+    public void ensurePreconditions () {
+        if (app.contact().list().isEmpty()) {
+            app.contact().create(new ContactData("test1", "test2", "test3", "test4","test1"));
+        }
+    }
+    @Test
+    public void testContactModification() {
+        List<ContactData> before = app.contact().list();
+        int index = before.size() - 1;
+        ContactData contact = new ContactData("test1", "test2", "test3", "test4", null);
+
+        app.contact().modify(contact);
+        List<ContactData> after = app.contact().list();
+
+        before.remove(index);
+        before.add(contact);
+        Comparator<? super ContactData> byName =
+                (c1, c2) -> c1.lastname().compareToIgnoreCase(c2.lastname());
         before.sort(byName);
         after.sort(byName);
+        Assert.assertEquals(before, after);
 
-        Assert.assertEquals(after, before);
+
     }
-
-}
+    }

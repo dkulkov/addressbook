@@ -14,23 +14,20 @@ import java.util.List;
 @Slf4j
 public class ContactCreationTest extends TestBase {
 
+    @Test
+    public void testContactCreation() throws Exception {
+        List<ContactData> before = app.contact().list();
+        ContactData contact = new ContactData("test1", "test2", "test3", "test4","test1");
+        app.contact().create(contact);
+        List<ContactData> after = app.contact().list();
+        Assert.assertEquals(after.size(), before.size() + 1);
 
-    @Disabled
-    public void testContactCreation() {
-        List<ContactData> before = app.getContactHelper().getContactList();
-        app.getContactHelper().goToNewContactForm();
-        app.getContactHelper().createContact(new ContactData("Test", "Ivanov", "89556768958", "test@mail.ru", "aaaa"), true);
-        app.getContactHelper().goToContactForm();
-        List<ContactData> after = app.getContactHelper().getContactList();
-
-        Comparator<? super ContactData> byName = Comparator
-                .comparing(ContactData::lastName)
-                .thenComparing(ContactData::firstName);
+        before.add(contact);
+        Comparator<? super ContactData> byName =
+                (c1, c2) -> c1.lastname().compareToIgnoreCase(c2.lastname());
         before.sort(byName);
         after.sort(byName);
-
-
-        Assert.assertEquals(after.size(), before.size() + 1);
+        Assert.assertEquals(before, after);
     }
 
 }

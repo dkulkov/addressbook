@@ -84,13 +84,12 @@ public class ContactHelper extends BaseHelper {
                 continue;
             }
             String[] name = elements.get(i).getText().split("\\s");
-            ContactData contact = new ContactData(
-                    getByIndexOrNull(name, 1),
-                    getByIndexOrNull(name, 0),
-                    getByIndexOrNull(name, 3),
-                    getByIndexOrNull(name, 2),
-                    getByIndexOrNull(name, 4));
-            contacts.add(contact);
+            contacts.add (new ContactData()
+                    .withFirstname(getByIndexOrNull(name, 1))
+                    .withLastname(getByIndexOrNull(name, 0))
+                    .withMobile(getByIndexOrNull(name, 3))
+                    .withEmail(getByIndexOrNull(name, 2))
+                    .withGroup(getByIndexOrNull(name, 4)));
         }
         return contacts;
     }

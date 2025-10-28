@@ -5,10 +5,6 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
-import ru.stqa.pft.addressbook.model.GroupData;
-
-import java.util.Comparator;
-import java.util.List;
 import java.util.Set;
 
 

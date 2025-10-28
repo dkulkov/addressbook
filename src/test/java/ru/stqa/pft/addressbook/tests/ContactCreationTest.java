@@ -24,8 +24,9 @@ public class ContactCreationTest extends TestBase {
         Assert.assertEquals(after.size(), before.size() + 1);
 
         contact.withId(after.stream()
-                .max(Comparator.comparing(c -> Integer.parseInt(c.id())))
-                .get().id());
+                .mapToInt((c) -> c.getId())
+                .max()
+                .getAsInt());
 
         before.add(contact);
         Assert.assertEquals(before, after);

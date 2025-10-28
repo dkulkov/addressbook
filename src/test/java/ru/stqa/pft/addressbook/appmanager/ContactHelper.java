@@ -9,7 +9,9 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends BaseHelper {
     public boolean acceptNextAlert = true;
@@ -90,6 +92,35 @@ public class ContactHelper extends BaseHelper {
                     .withMobile(getByIndexOrNull(name, 3))
                     .withEmail(getByIndexOrNull(name, 2))
                     .withGroup(getByIndexOrNull(name, 4)));
+        }
+        return contacts;
+    }
+
+
+    public Set<ContactData> all() {
+        Set<ContactData> contacts = new HashSet<ContactData>();
+        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='maintable']//tr[not(@class='header')]"));
+
+        for (int i = 1; i < rows.size(); i++) {
+            WebElement row = rows.get(i);
+            List<WebElement> cells = row.findElements(By.tagName("td"));
+
+
+            String id = row.findElement(By.name("selected[]")).getAttribute("value");
+
+
+
+            String lastName = cells.get(1).getText();
+            String firstName = cells.get(2).getText();
+            String email = cells.size() > 4 ? cells.get(4).getText() : "";
+            String mobile = cells.size() > 5 ? cells.get(5).getText() : "";
+
+            contacts.add(new ContactData()
+                    .withId(id)
+                    .withFirstname(firstName)
+                    .withLastname(lastName)
+                    .withMobile(mobile)
+                    .withEmail(email));
         }
         return contacts;
     }

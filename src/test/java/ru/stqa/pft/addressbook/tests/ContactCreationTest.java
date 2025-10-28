@@ -9,6 +9,7 @@ import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 
 @Slf4j
@@ -16,17 +17,17 @@ public class ContactCreationTest extends TestBase {
 
     @Test
     public void testContactCreation() throws Exception {
-        List<ContactData> before = app.contact().list();
+        Set<ContactData> before = app.contact().all();
         ContactData contact = new ContactData().withFirstname("test1").withLastname("test2").withMobile("test3").withEmail("test4").withGroup("test1");
         app.contact().create(contact);
-        List<ContactData> after = app.contact().list();
+        Set<ContactData> after = app.contact().all();
         Assert.assertEquals(after.size(), before.size() + 1);
 
+        contact.withId(after.stream()
+                .max(Comparator.comparing(c -> Integer.parseInt(c.id())))
+                .get().id());
+
         before.add(contact);
-        Comparator<? super ContactData> byName =
-                (c1, c2) -> c1.lastname().compareToIgnoreCase(c2.lastname());
-        before.sort(byName);
-        after.sort(byName);
         Assert.assertEquals(before, after);
     }
 

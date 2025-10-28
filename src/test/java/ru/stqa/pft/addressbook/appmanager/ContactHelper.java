@@ -137,7 +137,7 @@ public class ContactHelper extends BaseHelper {
     }
 
     public void modify(ContactData contact) {
-        selectContact();
+        selectContactById(contact.getId());
         initContactModification();
         fillContactForm(contact, false);
         submitContactModification();

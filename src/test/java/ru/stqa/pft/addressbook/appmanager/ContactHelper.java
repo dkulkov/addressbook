@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 
 
 import java.util.ArrayList;
@@ -51,9 +52,7 @@ public class ContactHelper extends BaseHelper {
         click(By.xpath("//input[@value='Delete']"));
     }
 
-    public void selectContact( ) {
-        click(By.xpath("//table[@id='maintable']//tr[2]/td[1]/input"));
-    }
+
 
     public void selectContactById(int id ) {
         click(By.xpath("//input[@value='" + id + "']"));
@@ -83,27 +82,11 @@ public class ContactHelper extends BaseHelper {
         return driver.findElements(By.name("selected[]")).size();
     }
 
-    public List<ContactData> list() {
-        List<ContactData> contacts = new ArrayList<>();
-        List<WebElement> elements = driver.findElements(By.xpath("//table[@id='maintable']//tr[not(@class='header')]"));
-        for (int i = 0; i < elements.size(); i++) {
-            if (i == 0) {
-                continue;
-            }
-            String[] name = elements.get(i).getText().split("\\s");
-            contacts.add (new ContactData()
-                    .withFirstname(getByIndexOrNull(name, 1))
-                    .withLastname(getByIndexOrNull(name, 0))
-                    .withMobile(getByIndexOrNull(name, 3))
-                    .withEmail(getByIndexOrNull(name, 2))
-                    .withGroup(getByIndexOrNull(name, 4)));
-        }
-        return contacts;
-    }
 
 
-    public Set<ContactData> all() {
-        Set<ContactData> contacts = new HashSet<ContactData>();
+
+    public Contacts all() {
+        Contacts contacts = new Contacts();
         List<WebElement> rows = driver.findElements(By.xpath("//table[@id='maintable']//tr[not(@class='header')]"));
 
         for (int i = 1; i < rows.size(); i++) {
@@ -143,12 +126,7 @@ public class ContactHelper extends BaseHelper {
         submitContactModification();
         returnToContact();
     }
-    public void delete() {
-        selectContact();
-        deleteSelectedContact();
-        acceptAlert();
-        returnToContact();
-    }
+
 
     public void delete(ContactData Contact) {
         selectContactById(Contact.getId());

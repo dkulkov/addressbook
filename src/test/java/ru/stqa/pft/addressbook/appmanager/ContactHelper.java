@@ -79,7 +79,7 @@ public class ContactHelper extends BaseHelper {
         return isElementPresent(By.xpath("//table[@id='maintable']//tr[2]/td[1]/input"));
     }
 
-    public int getContactCount() {
+    public int count() {
         return driver.findElements(By.name("selected[]")).size();
     }
 

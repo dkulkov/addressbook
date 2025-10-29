@@ -71,6 +71,7 @@ public class ContactHelper extends BaseHelper {
         selectContactCreation();
         fillContactForm(contact, true);
         submitContactCreation();
+        contactCache = null;
         returnToContact();
     }
 
@@ -83,10 +84,13 @@ public class ContactHelper extends BaseHelper {
     }
 
 
-
+      private Contacts contactCache = null;
 
     public Contacts all() {
-        Contacts contacts = new Contacts();
+        if (contactCache != null) {
+            return new Contacts(contactCache);
+        }
+        contactCache = new Contacts();
         List<WebElement> rows = driver.findElements(By.xpath("//table[@id='maintable']//tr[not(@class='header')]"));
 
         for (int i = 1; i < rows.size(); i++) {
@@ -98,7 +102,7 @@ public class ContactHelper extends BaseHelper {
 
             String[] name = row.getText().split("\\s");
 
-            contacts.add(new ContactData()
+            contactCache.add(new ContactData()
                     .withId(id)
                     .withFirstname(getByIndexOrNull(name, 1))
                     .withLastname(getByIndexOrNull(name, 0))
@@ -106,7 +110,7 @@ public class ContactHelper extends BaseHelper {
                     .withEmail(getByIndexOrNull(name, 2))
                     .withGroup(getByIndexOrNull(name, 4)));
         }
-        return contacts;
+        return new Contacts(contactCache);
     }
 
     private String getByIndexOrNull(String[] s, int index) {
@@ -124,6 +128,7 @@ public class ContactHelper extends BaseHelper {
         initContactModification();
         fillContactForm(contact, false);
         submitContactModification();
+        contactCache = null;
         returnToContact();
     }
 
@@ -132,6 +137,7 @@ public class ContactHelper extends BaseHelper {
         selectContactById(Contact.getId());
         deleteSelectedContact();
         acceptAlert();
+        contactCache = null;
         returnToContact();
     }
 }

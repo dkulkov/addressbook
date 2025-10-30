@@ -18,21 +18,25 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertEquals;
 
 public class ContactDeletionTest extends TestBase {
+
     @BeforeEach
     public void ensurePreconditions() {
         if (app.contact().all().isEmpty()) {
-            app.contact().create(new ContactData().withFirstname("test1").withLastname("test2").withMobile("test3").withEmail("test4").withGroup("test1"));
+            app.contact().create(new ContactData().withFirstname("test1").withLastname("test2").withGroup("test1"));
         }
     }
 
     @Test
     public void testContactDeletion() throws Exception {
-        Contacts before = app.contact().all();
+        Set<ContactData> before = app.contact().all();
         ContactData deletedContact = before.iterator().next();
         app.contact().delete(deletedContact);
-        assertThat(app.contact().count(), equalTo(before.size() - 1));
-        Contacts after = app.contact().all();
-        assertThat(after, equalTo(before.without(deletedContact)));
+        Set<ContactData> after = app.contact().all();
+        assertThat(after.size(), equalTo(before.size() - 1));
+
+        before.remove(deletedContact);
+        assertThat(after, equalTo(before));
     }
 }
+
 

@@ -3,40 +3,59 @@ package ru.stqa.pft.addressbook.model;
 
 import java.util.Objects;
 
-public final class ContactData {
-    private int id = Integer.MAX_VALUE;
+public class ContactData {
+    private int id;
     private String firstname;
     private String lastname;
-    private String mobile;
-    private String email;
     private String group;
+    private String homePhone;
+    private String mobilePhone;
+    private String workPhone;
+    private String allPhones;
+
+    public String getAllPhones() {
+        return allPhones;
+
+    }
 
 
-    public int getId() {return id;}
 
-    public ContactData withId(int id) {
-        this.id = id;
+
+
+    public String getWorkPhone() {
+        return workPhone;
+    }
+
+    public ContactData withWorkPhone(String workPhone) {
+        this.workPhone = workPhone;
         return this;
     }
 
-    public ContactData withLastname(String lastname) {
-        this.lastname = lastname;
+    public String getMobilePhone() {
+        return mobilePhone;
+    }
+
+    public ContactData withMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
         return this;
     }
 
-    public ContactData withFirstname(String firstname) {
-        this.firstname = firstname;
+    public ContactData withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
         return this;
     }
 
-    public ContactData withMobile(String mobile) {
-        this.mobile = mobile;
+    public String getHomePhone() {
+        return homePhone;
+    }
+
+    public ContactData withHomePhone(String homePhone) {
+        this.homePhone = homePhone;
         return this;
     }
 
-    public ContactData withEmail(String email) {
-        this.email = email;
-        return this;
+    public String getGroup() {
+        return group;
     }
 
     public ContactData withGroup(String group) {
@@ -44,44 +63,36 @@ public final class ContactData {
         return this;
     }
 
-    @Override
-    public String toString() {
-        return "ContactData{" +
-                "id=" + id +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", mobile='" + mobile + '\'' +
-                ", email='" + email + '\'' +
-                ", group='" + group + '\'' +
-                '}';
-    }
-
-    public int id() {
-        return id;
-    }
-
-    public String firstname() {
-        return firstname;
-    }
-
-    public String lastname() {
+    public String getLastname() {
         return lastname;
     }
 
-    public String mobile() {
-        return mobile;
+    public ContactData withLastname(String lastname) {
+        this.lastname = lastname;
+        return this;
     }
 
-    public String email() {
-        return email;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public String group() {
-        return group;
+    public ContactData withFirstname(String firstname) {
+        this.firstname = firstname;
+        return this;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public ContactData withId(int id) {
+        this.id = id;
+        return this;
     }
 
     @Override
     public boolean equals(Object o) {
+        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ContactData that = (ContactData) o;
         return id == that.id &&
